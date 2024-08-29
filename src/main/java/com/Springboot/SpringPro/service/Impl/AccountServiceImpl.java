@@ -27,8 +27,16 @@ public class AccountServiceImpl implements AccountService {
         Account savedAccount = accountRepository.save(account);
 
         // Log the savedAccount details
-        logger.info("Ansel Account: {}", accountDto);
+        logger.info("Ansel Account: {}",account);
 
         return AccountMapper.mapAccountDTO(savedAccount);
+    }
+
+    @Override
+    public AccountDTO geAccountDTO(Long id) {
+        Account value = accountRepository.findById(id)
+        .orElseThrow(()->new RuntimeException("Account not found"));
+
+        return AccountMapper.mapAccountDTO((value));
     }
 }
