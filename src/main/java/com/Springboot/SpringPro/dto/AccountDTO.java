@@ -1,4 +1,4 @@
-package com.Springboot.dto;
+package com.Springboot.SpringPro.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

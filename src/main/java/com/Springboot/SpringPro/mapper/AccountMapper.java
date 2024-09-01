@@ -2,8 +2,9 @@ package com.Springboot.SpringPro.mapper;
 
 import org.slf4j.LoggerFactory;
 
+import com.Springboot.SpringPro.dto.AccountDTO;
 import com.Springboot.SpringPro.entity.Account;
-import com.Springboot.dto.AccountDTO;
+
 import org.slf4j.Logger;
 public class AccountMapper {
     static private final Logger logger = LoggerFactory.getLogger(AccountMapper.class);

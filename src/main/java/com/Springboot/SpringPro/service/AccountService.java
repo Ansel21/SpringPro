@@ -2,7 +2,7 @@ package com.Springboot.SpringPro.service;
 
 import java.util.List;
 
-import com.Springboot.dto.AccountDTO;
+import com.Springboot.SpringPro.dto.AccountDTO;
 
 public interface AccountService {
     AccountDTO createAccount(AccountDTO accountDto);

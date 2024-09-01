@@ -2,11 +2,11 @@ package com.Springboot.SpringPro.service.Impl;
 
 import org.springframework.stereotype.Service;
 
+import com.Springboot.SpringPro.dto.AccountDTO;
 import com.Springboot.SpringPro.entity.Account;
 import com.Springboot.SpringPro.mapper.AccountMapper;
 import com.Springboot.SpringPro.repository.AccountRepository;
 import com.Springboot.SpringPro.service.AccountService;
-import com.Springboot.dto.AccountDTO;
 
 import java.util.List;
 import java.util.stream.Collector;
@@ -72,6 +72,7 @@ public class AccountServiceImpl implements AccountService {
     @Override 
     public List<AccountDTO> getAllAccount(){
         List<Account> accounts = accountRepository.findAll();
+        logger.info("Accounts information:{}",accounts.stream().map(account -> AccountMapper.mapAccountDTO(account)).collect(Collectors.toList()));
         return accounts.stream().map(account -> AccountMapper.mapAccountDTO(account)).collect(Collectors.toList());
     }
 
