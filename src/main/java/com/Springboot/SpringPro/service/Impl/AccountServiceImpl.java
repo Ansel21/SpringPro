@@ -7,6 +7,11 @@ import com.Springboot.SpringPro.mapper.AccountMapper;
 import com.Springboot.SpringPro.repository.AccountRepository;
 import com.Springboot.SpringPro.service.AccountService;
 import com.Springboot.dto.AccountDTO;
+
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,5 +53,31 @@ public class AccountServiceImpl implements AccountService {
         Account saveAccount = accountRepository.save(account);
         logger.info("Account info : {}",amount);
         return AccountMapper.mapAccountDTO(saveAccount);
+    }
+
+    @Override
+    public AccountDTO withdrawAccount(Long id,double amount){
+        Account account = accountRepository.findById(id).orElseThrow(()-> new RuntimeException("Account not found"));
+        logger.info("ansel evander:{}",amount);
+        if(account.getBalance() < amount){
+            throw new RuntimeException("Insufficient Balance");
+        }
+        double totalAmount = account.getBalance() - amount;
+        account.setBalance(totalAmount);
+        Account saveAccount = accountRepository.save(account);
+        logger.info("Account details:{}",saveAccount);
+        return AccountMapper.mapAccountDTO(saveAccount);
+    }
+
+    @Override 
+    public List<AccountDTO> getAllAccount(){
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map(account -> AccountMapper.mapAccountDTO(account)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void delAccountDTO(Long id){
+        Account account = accountRepository.findById(id).orElseThrow(()-> new RuntimeException("Account not found"));
+        accountRepository.delete(account);
     }
 }
